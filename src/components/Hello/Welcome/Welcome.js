@@ -6,7 +6,9 @@ function Welcome({ isLoggedIn }) {
 
     } else {
         return (
-            <h1>Please, SignUp</h1>
+            <div> <h1>Danger Line</h1>
+            <h2>!!!</h2>
+            </div>
         )
     }
 }
