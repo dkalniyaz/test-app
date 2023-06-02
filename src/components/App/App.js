@@ -1,17 +1,21 @@
 import './App.css';
-import Hello from '../Hello/Hello';
-import Counter from '../Counter/Counter';
+
+import React, {useState} from 'react';
+
+import BooksList from '../BooksList/BooksList';
+import SearchBar from '../SearchBar/SearchBar';
+import BookDetails from '../BooksList/BookDetails/BookDetails';
 
 function App() {
 
-  const namesArr = ['Alexandr', 'Sergey', 'Maria']
-  const infoObj = {'title': 'Developer', 'age' : 33}
+  const [search, setSearch] = useState('')
+  const [selectedbook, setselectedbook] = useState(null)
 
   return (
-    <div className="App">
-      <h1>Application </h1>
-      <Hello names={namesArr} info={infoObj}/>
-      <Counter />
+    <div className="app">
+      <SearchBar setSearch = {setSearch} />
+      <BooksList search = {search} onSelectBook = {setselectedbook} />
+      {selectedbook && <BookDetails bookId = {selectedbook} />}
     </div>
   );
 }
