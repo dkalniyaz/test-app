@@ -1,20 +1,21 @@
 import React, {useEffect, useState} from "react"
 
+import { getBookBySearchTerm } from "../../api/bookApi";
+
 function BooksList({search, onSelectBook}) {
     const [books, setBooks] = useState([]);
 
     useEffect(() => {
         if (search){
-            fetch(`https://www.googleapis.com/books/v1/volumes?q=${search}`)
-            .then((response) => response.json())
-            .then((data) => {
-                if(data.items){
-                    setBooks(data.items)
-                } else {
-                    setBooks([])
-                }
-            })
-            .catch((error) => console.error(error))
+            getBookBySearchTerm(search)
+                .then((response) => {
+                    if(response.data.items){
+                        setBooks(response.data.items)
+                    } else {
+                        setBooks([])
+                    }
+                })
+                .catch((error) => console.error(error))
         }
     }, [search])
 
